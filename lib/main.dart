@@ -1,6 +1,7 @@
-import 'package:crud_flutter/views/user_list.dart';
+import 'package:crud_flutter/provider/users.dart';
 import 'package:flutter/material.dart';
-import './views/user_list.dart';
+import 'package:crud_flutter/views/user_list.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,14 +10,20 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (ctx) => Users()
+      )
+    ],
+    child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: UserList(),
       ),
-      home: UserList(),
     );
   }
 }
