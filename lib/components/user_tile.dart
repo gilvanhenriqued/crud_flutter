@@ -12,8 +12,32 @@ class UserTile extends StatelessWidget {
       ? CircleAvatar(child: Icon(Icons.person))
       : CircleAvatar(backgroundImage: NetworkImage(user.avatarUrl));
     
-    return ListTile(
-      leading: avatar,
-    );
+    return Padding(
+      padding: const EdgeInsets.all(9.0),
+      child: ListTile(
+        leading: avatar,
+        title: Text(
+          user.name, 
+          style: TextStyle(fontSize: 19)),
+          subtitle: Text(user.email),
+          trailing: Container(
+            width: 100,
+            child: Row(
+              children: <Widget>[
+                IconButton( 
+                  icon: Icon(Icons.edit),
+                  color: Colors.black54,
+                  onPressed: () {},
+                ),
+                IconButton( 
+                  icon: Icon(Icons.delete),
+                  color: Colors.red,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+      ),
+    ); 
   }
 }
