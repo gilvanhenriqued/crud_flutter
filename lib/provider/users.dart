@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:crud_flutter/data/dummy_users.dart';
 import 'package:crud_flutter/models/user.dart';
 import 'package:flutter/material.dart';
@@ -18,5 +20,29 @@ class Users with ChangeNotifier {
     return _items.values.elementAt(i);
   }
 
-  
+  void put(User user) {
+    if(user == null) {
+      return;
+    }
+
+    // caso seja alteração
+    if(user.id != null &&
+      user.id.trim().isNotEmpty &&
+      _items.containsKey(user.id)) {
+      
+      _items.update(user.id, (_) => user);
+    
+    } else {
+      // adicionar
+      final id = Random().nextDouble().toString();
+      _items.putIfAbsent(id, () => User(
+        id: id,
+        name: user.name,
+        email: user.email,
+        avatarUrl: user.avatarUrl,
+      ));
+    }
+
+      notifyListeners();
+  }
 }
