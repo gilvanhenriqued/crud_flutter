@@ -15,7 +15,6 @@ class UserForm extends StatelessWidget {
       _formData['email'] = user.email;
       _formData['avatarUrl'] = user.avatarUrl;
     }
-
   }
   
   @override
